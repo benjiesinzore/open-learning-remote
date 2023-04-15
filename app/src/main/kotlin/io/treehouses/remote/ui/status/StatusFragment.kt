@@ -20,12 +20,14 @@ import io.treehouses.remote.bases.BaseFragment
 import io.treehouses.remote.callback.NotificationCallback
 import io.treehouses.remote.databinding.ActivityStatusFragmentBinding
 import io.treehouses.remote.databinding.DialogRenameStatusBinding
+import io.treehouses.remote.databinding.DialogWificountryBinding
 import io.treehouses.remote.utils.DialogUtils
 import io.treehouses.remote.utils.Utils
 import io.treehouses.remote.interfaces.FragmentDialogInterface
-import kotlinx.android.synthetic.main.dialog_wificountry.*
 
 class StatusFragment : BaseFragment(), FragmentDialogInterface {
+
+    private var bindingDialog : DialogWificountryBinding = DialogWificountryBinding.inflate(layoutInflater)
 
     protected val viewModel: StatusViewModel by viewModels(ownerProducer = { this })
     var countryList: ListView? = null
@@ -47,8 +49,8 @@ class StatusFragment : BaseFragment(), FragmentDialogInterface {
     private fun wifiCountry(adapter: ArrayAdapter<String?>) {
         val dialog = Dialog(requireContext())
         dialog.setContentView(R.layout.dialog_wificountry)
-        dialog.countries
-        countryList = dialog.countries
+        bindingDialog.countries
+        countryList = bindingDialog.countries
         adapter.filter.filter("")
         countryList?.adapter = adapter
         countryList?.isTextFilterEnabled = true
@@ -158,7 +160,7 @@ class StatusFragment : BaseFragment(), FragmentDialogInterface {
 
 
     private fun searchView(dialog: Dialog) {
-        val searchView = dialog.search_bar
+        val searchView = bindingDialog.searchBar
         searchView.isIconifiedByDefault = false
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {

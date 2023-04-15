@@ -1,5 +1,6 @@
 package io.treehouses.remote
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Handler
@@ -83,6 +84,7 @@ open class BaseInitialActivity: PermissionActivity(), NavigationView.OnNavigatio
     /**
      * The Handler that gets information back from the BluetoothChatService
      */
+    @SuppressLint("HandlerLeak")
     val mHandler: Handler = object : Handler() {
         override fun handleMessage(msg: Message) {
 //            FragmentActivity activity = getActivity();
@@ -174,6 +176,7 @@ open class BaseInitialActivity: PermissionActivity(), NavigationView.OnNavigatio
     companion object {
         @JvmStatic
         var instance: BaseInitialActivity? = null
+        @SuppressLint("StaticFieldLeak")
         lateinit var mChatService: BluetoothChatService
     }
 }

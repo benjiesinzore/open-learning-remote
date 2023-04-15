@@ -1,5 +1,6 @@
 package io.treehouses.remote.fragments.dialogfragments
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
 import android.app.ProgressDialog
@@ -27,6 +28,7 @@ import io.treehouses.remote.utils.DialogUtils
 import io.treehouses.remote.utils.logD
 import java.util.*
 
+@SuppressLint("MissingPermission")
 class RPIDialogFragment : BaseDialogFragment(), DeviceDeleteListener {
     private val raspberryDevices: MutableList<BluetoothDevice> = ArrayList()
     private val allDevices: MutableList<BluetoothDevice> = ArrayList()
@@ -198,6 +200,7 @@ class RPIDialogFragment : BaseDialogFragment(), DeviceDeleteListener {
     }
 
     private val mReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+
         override fun onReceive(context: Context, intent: Intent) {
             if (BluetoothDevice.ACTION_FOUND == intent.action) {
                 val device = intent.getParcelableExtra<BluetoothDevice>(BluetoothDevice.EXTRA_DEVICE)

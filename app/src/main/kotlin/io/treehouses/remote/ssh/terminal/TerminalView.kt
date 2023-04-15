@@ -346,7 +346,7 @@ class TerminalView(context: Context, bridge: TerminalBridge, pager: TerminalView
                 return super.onSingleTapConfirmed(e)
             }
 
-            override fun onDoubleTap(e: MotionEvent?): Boolean {
+            override fun onDoubleTap(e: MotionEvent): Boolean {
                 try {
                     bridge.transport?.write(0x09)
                     bridge.tryKeyVibrate()

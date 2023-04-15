@@ -13,7 +13,7 @@ import io.treehouses.remote.callback.KeyMenuListener
 import io.treehouses.remote.databinding.RowKeyBinding
 
 
-class ViewHolderSSHAllKeyRow(private val binding: RowKeyBinding, private val listener: KeyMenuListener) :
+abstract class ViewHolderSSHAllKeyRow(private val binding: RowKeyBinding, private val listener: KeyMenuListener) :
         RecyclerView.ViewHolder(binding.root),
         View.OnCreateContextMenuListener,
         MenuItem.OnMenuItemClickListener,
@@ -37,7 +37,7 @@ class ViewHolderSSHAllKeyRow(private val binding: RowKeyBinding, private val lis
         menu?.children?.forEach { it.setOnMenuItemClickListener(this) }
     }
 
-    override fun onMenuItemClick(item: MenuItem?): Boolean {
+    override fun onMenuItemClick(item: MenuItem): Boolean {
         when (item?.itemId) {
             R.id.copy_public -> listener.onCopyPub(adapterPosition)
             R.id.delete_key -> listener.onDelete(adapterPosition)

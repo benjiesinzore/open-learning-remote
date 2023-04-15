@@ -20,6 +20,7 @@ import io.treehouses.remote.R
 import io.treehouses.remote.Tutorials
 import io.treehouses.remote.bases.BaseFragment
 import io.treehouses.remote.databinding.ActivityNetworkFragmentBinding
+import io.treehouses.remote.databinding.DialogSpeedtestBinding
 import io.treehouses.remote.fragments.DiscoverFragment
 import io.treehouses.remote.fragments.dialogfragments.WifiDialogFragment
 import io.treehouses.remote.interfaces.FragmentDialogInterface
@@ -29,9 +30,9 @@ import io.treehouses.remote.ui.network.bottomsheetdialogs.EthernetBottomSheet
 import io.treehouses.remote.ui.network.bottomsheetdialogs.HotspotBottomSheet
 import io.treehouses.remote.ui.network.bottomsheetdialogs.WifiBottomSheet
 import io.treehouses.remote.utils.Utils
-import kotlinx.android.synthetic.main.dialog_speedtest.*
 open class NetworkFragment : BaseFragment(), View.OnClickListener, FragmentDialogInterface {
     private lateinit var binding: ActivityNetworkFragmentBinding
+    private var bindingDialog : DialogSpeedtestBinding = DialogSpeedtestBinding.inflate(layoutInflater)
     private lateinit var speedDialog: Dialog
     private lateinit var speedDialogDismiss: Button
     private lateinit var speedDialogTest: Button
@@ -94,8 +95,8 @@ open class NetworkFragment : BaseFragment(), View.OnClickListener, FragmentDialo
             binding.speedTest == v -> speedTest()
             binding.reverseLookup == v -> reverseLookup()
             binding.discoverBtn == v -> listener.openCallFragment(DiscoverFragment())
-            speedDialog.speedBtnTest == v -> viewModel.treehousesInternet()
-            speedDialog.speedBtnDismiss == v -> speedDialog.dismiss()
+            bindingDialog.speedBtnTest == v -> viewModel.treehousesInternet()
+            bindingDialog.speedBtnDismiss == v -> speedDialog.dismiss()
         }
     }
 
@@ -134,7 +135,7 @@ open class NetworkFragment : BaseFragment(), View.OnClickListener, FragmentDialo
         speedDialogDismiss = speedDialog.findViewById(R.id.speedBtnDismiss); speedDialogTest = speedDialog.findViewById(R.id.speedBtnTest)
         speedDialogDismiss.setOnClickListener(this); speedDialogTest.setOnClickListener(this)
         viewModel.downloadUpload.observe(viewLifecycleOwner, Observer {
-            speedDialog.speed_text.text = it
+            bindingDialog.speedText.text = it
         })
         viewModel.dialogCheck.observe(viewLifecycleOwner, Observer {
             speedDialogCheck = it

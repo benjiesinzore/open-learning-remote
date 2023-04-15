@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -53,22 +54,38 @@ class SSHAllKeyFragment : FullScreenDialogFragment(), KeyMenuListener {
     }
 
     private fun setUpAdapter() {
-        bind.allKeys.adapter = object : RecyclerView.Adapter<ViewHolderSSHAllKeyRow>() {
-            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderSSHAllKeyRow {
-                return ViewHolderSSHAllKeyRow(
-                        RowKeyBinding.inflate(LayoutInflater.from(parent.context),
-                                parent, false), this@SSHAllKeyFragment)
+        bind.allKeys.adapter = object : RecyclerView.Adapter<MyViewHolderSSHAllKeyRow>() {
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolderSSHAllKeyRow {
+                val binding = RowKeyBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                return MyViewHolderSSHAllKeyRow(binding, this@SSHAllKeyFragment)
             }
 
             override fun getItemCount(): Int {
                 return allKeys.size
             }
 
-            override fun onBindViewHolder(holder: ViewHolderSSHAllKeyRow, position: Int) {
+            override fun onBindViewHolder(holder: MyViewHolderSSHAllKeyRow, position: Int) {
                 holder.bind(allKeys[position])
             }
         }
     }
+
+    class MyViewHolderSSHAllKeyRow(
+        binding: RowKeyBinding,
+        fragment: SSHAllKeyFragment
+    ) : ViewHolderSSHAllKeyRow(binding, fragment) {
+
+        fun bind() {
+            // Bind the data to the views in the ViewHolder
+        }
+
+        override fun onMenuItemClick(item: MenuItem): Boolean {
+            TODO("Not yet implemented")
+        }
+
+
+    }
+
 
     private fun copyToClipboard(pubkey: PubKeyBean) {
         val openSSH = getOpenSSH(pubkey)

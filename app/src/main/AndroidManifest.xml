@@ -33,6 +33,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".IntroActivity" />
         <activity
+            android:exported="true"
             android:name=".SplashScreenActivity"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -53,7 +54,8 @@
             android:launchMode="singleTop"
             android:theme="@style/Theme.AppCompat"
             android:windowSoftInputMode="stateAlwaysVisible|adjustResize"/>
-        <service android:name=".utils.GPSService" />
+        <service android:name=".utils.GPSService"
+            tools:ignore="Instantiatable" />
 
         <activity
             android:name=".InitialActivity"

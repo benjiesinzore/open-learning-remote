@@ -1,5 +1,6 @@
 package io.treehouses.remote.fragments.dialogfragments
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
@@ -20,6 +21,7 @@ import io.treehouses.remote.utils.logE
 import java.util.*
 
 
+@SuppressLint("MissingPermission")
 class WifiDialogFragment : DialogFragment() {
     private var mDialog: AlertDialog? = null
     private var wifiManager: WifiManager? = null
@@ -116,6 +118,7 @@ class WifiDialogFragment : DialogFragment() {
             progressBar!!.visibility = View.INVISIBLE
         }
     }
+
 
     private fun scanSuccess() {
         val results = wifiManager!!.scanResults
